@@ -74,6 +74,6 @@ public class AWSToBQETLSimple {
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
-        p.run().waitUntilFinish();
+        p.run();
     }
 }
