@@ -1,0 +1,7 @@
+com\highergear\beam\sample\AWSToBQETLSimple.class
+com\highergear\beam\sample\schema\CustomerTableSchema.class
+com\highergear\beam\sample\options\AWSToBQETLOptions.class
+com\highergear\beam\sample\transform\MapToCustomer.class
+com\highergear\beam\sample\schema\builder\FieldSchemaListBuilder.class
+com\highergear\beam\sample\model\Customer.class
+com\highergear\beam\sample\options\AwsOptionsParser.class
