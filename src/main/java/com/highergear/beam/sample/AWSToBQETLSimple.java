@@ -30,7 +30,21 @@ public class AWSToBQETLSimple {
 
         TableSchema schema = CustomerTableSchema.Create();
         List<TableFieldSchema> schemaFields = schema.getFields();
-
+        String customerIdKey = schemaFields.get(0).getName();
+        String nameStyleKey = schemaFields.get(1).getName();
+        String titleKey = schemaFields.get(2).getName();
+        String firstNameKey = schemaFields.get(3).getName();
+        String middleNameKey = schemaFields.get(4).getName();
+        String lastNameKey = schemaFields.get(5).getName();
+        String suffixKey = schemaFields.get(6).getName();
+        String companyNameKey = schemaFields.get(7).getName();
+        String salesPersonKey = schemaFields.get(8).getName();
+        String emailAddressKey = schemaFields.get(9).getName();
+        String phoneKey = schemaFields.get(10).getName();
+        String passwordHashKey = schemaFields.get(11).getName();
+        String passwordSaltKey = schemaFields.get(12).getName();
+        String rowGuidKey = schemaFields.get(13).getName();
+        String modifiedDataKey = schemaFields.get(14).getName();
 
         p.apply("Read Customer",
                         TextIO.read().from(options.getInputBucketUrl() + "customer.csv"))
@@ -42,21 +56,21 @@ public class AWSToBQETLSimple {
                                 .withSchema(schema)
                                 .withFormatFunction((Customer customer) ->
                                         new TableRow()
-                                                .set(schemaFields.get(0).getName(), customer.getCustomerId())
-                                                .set(schemaFields.get(1).getName(), customer.isNameStyle())
-                                                .set(schemaFields.get(2).getName(), customer.getTitle())
-                                                .set(schemaFields.get(3).getName(), customer.getFirstName())
-                                                .set(schemaFields.get(4).getName(), customer.getMiddleName())
-                                                .set(schemaFields.get(5).getName(), customer.getLastName())
-                                                .set(schemaFields.get(6).getName(), customer.getSuffix())
-                                                .set(schemaFields.get(7).getName(), customer.getCompanyName())
-                                                .set(schemaFields.get(8).getName(), customer.getSalesPerson())
-                                                .set(schemaFields.get(9).getName(), customer.getEmailAddress())
-                                                .set(schemaFields.get(10).getName(), customer.getPhone())
-                                                .set(schemaFields.get(11).getName(), customer.getPasswordHash())
-                                                .set(schemaFields.get(12).getName(), customer.getPasswordSalt())
-                                                .set(schemaFields.get(13).getName(), customer.getRowGuid())
-                                                .set(schemaFields.get(14).getName(), customer.getModifiedDate()))
+                                                .set(customerIdKey, customer.getCustomerId())
+                                                .set(nameStyleKey, customer.isNameStyle())
+                                                .set(titleKey, customer.getTitle())
+                                                .set(firstNameKey, customer.getFirstName())
+                                                .set(middleNameKey, customer.getMiddleName())
+                                                .set(lastNameKey, customer.getLastName())
+                                                .set(suffixKey, customer.getSuffix())
+                                                .set(companyNameKey, customer.getCompanyName())
+                                                .set(salesPersonKey, customer.getSalesPerson())
+                                                .set(emailAddressKey, customer.getEmailAddress())
+                                                .set(phoneKey, customer.getPhone())
+                                                .set(passwordHashKey, customer.getPasswordHash())
+                                                .set(passwordSaltKey, customer.getPasswordSalt())
+                                                .set(rowGuidKey, customer.getRowGuid())
+                                                .set(modifiedDataKey, customer.getModifiedDate()))
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
